@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html ng-app="app">
+	<head>
+		<meta charset="UTF-8">
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
+		<script type="text/javascript" src="https://code.angularjs.org/1.5.6/i18n/angular-locale_es-es.js"></script>
+		<script src="script.js"></script>
+		<link rel="stylesheet" type="text/css" href="prueba1.css">
+		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	</head>
+	<body ng-controller="ControladorTareas as ctrl">
+		<div class="container">
+			<h1>{{ctrl.mensaje}}</h1>
+			<form>
+				<label for="cantidad">Cantidad</label>
+				<input type="text" id="cantidad" size="6" ng-model="ctrl.cantidad"><br>
+				<label for="precio">Precio</label>
+				<input type="text" id="precio" size="6" ng-model="ctrl.precio"><br>
+				<input class="btn btn-default" type="button" id="boton" value="Calcular" ng-click="ctrl.Calcular()"><br> 
+				<label ng-bind="ctrl.precioTotal"></label>
+			</form>
+			<p>{{ctrl.Calcular() | currency}}</p>
+			<h2>Lista de tareas</h2>
+			<span>{{ctrl.restantes()}} de {{ctrl.tareas.length}}</span>
+			[	<a class="text-danger" href="" ng-click="ctrl.eliminar()">Eliminar</a>	]
+			<ul>
+				<li ng-repeat="tarea in ctrl.tareas">
+					<input type="checkbox" ng-model="tarea.hecho">
+					<span class="hecho-{{tarea.hecho}}">{{tarea.texto}}</span>
+				</li>
+			</ul>
+			<button ng-click="ctrl.Mostrar()" ng-hide="ctrl.formVisible">Agregar nueva</button>
+			<form id="formulario" ng-show="ctrl.formVisible">
+				<input type="text" size="20" placeholder="Nueva tarea" ng-model="ctrl.textoNuevaTarea">
+				<button class="btn btn-default" type="submit" ng-click="ctrl.agregarTarea()">Agregar</button>
+			</form>
+
+		</div>
+	</body>
+</html>
